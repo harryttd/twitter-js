@@ -4,7 +4,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const chalk = require('chalk');
+const nunjucks = require('nunjucks');
 const app = express(); // creates an instance of an express application
+
+
 const port = 3000;
 
 app.use(function (req, res, next) {
@@ -33,6 +36,29 @@ app.get('/special', function(request, response) {
   response.send('Hello Aryeh! You are in special!');
 });
 
+app.get(`/special/wizards`, function(req, res) {
+	var people = [{name: 'Full'}, {name: 'Stacker'}, {name: 'Son'}];
+	res.render( 'index', {title: 'Hall of Fame', people: people} );
+});
+
 app.listen(port, (request, response) => {
   console.log(chalk.blue("server listening"));
 });
+
+
+
+var wizards = {
+    title: 'Notterrible',
+    people: [
+        { name: 'Sarumon'},
+        { name: 'Harry' },
+        { name: 'Dumbledore'}
+    ]
+};
+nunjucks.configure('views', {noCache: true});
+nunjucks.render('index.html', wizards, function (err, output) {
+    console.log(output);
+});
+app.set('view engine', 'html');
+app.engine('html', nunjucks.render);
+
