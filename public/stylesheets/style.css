@@ -43,13 +43,14 @@ code {
 }
 
 .tweetbox {
-  padding: 7px;
+  padding: 20px;
 }
 
 .tweetbox img {
   float: left;
-  height: 48px;
-  width: 48px;
+  height: 72px;
+  width: 72px;
+  padding: 10px;
   content:url("http://lorempixel.com/48/48");
 }
 .content {
@@ -57,4 +58,8 @@ code {
 }
 .content .by {
   font-weight: bold;
+}
+
+ul {
+  list-style-type: none;
 }

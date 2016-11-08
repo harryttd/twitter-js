@@ -12,11 +12,14 @@
       100 followers
     </div>
     <div class="col-md-9">
+      <ul>
 
       <!-- display tweets here -->
       {% for tweet in tweets %}
-        <li>{{tweet.content}}</li>
+        <li class = "tweetbox"><img><p><strong>{{tweet.name}}</strong> says: </p>{{tweet.content}}</li>
       {% endfor %}
+
+      </ul>
 
     </div>
   </div>

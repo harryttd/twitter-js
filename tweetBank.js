@@ -1,4 +1,5 @@
 /*jshint esversion: 6 */
+'use strict';
 
 // Clone is analogous to Pass By Reference while DeepClone is analogous to Pass By Value.
 //
