@@ -1,5 +1,6 @@
+// Solution video: https://www.youtube.com/watch?v=0NvankAwgHU
+
 /*jshint esversion: 6 */
-'use strict';
 
 // Clone is analogous to Pass By Reference while DeepClone is analogous to Pass By Value.
 //
@@ -42,5 +43,5 @@ const getFakeTweet = function() {
 for (let i = 0; i < 10; i++) {
   module.exports.add( getFakeName(), getFakeTweet() );
 }
-console.log(data);
-console.log(find({content: 'I love Fullstack!!!'}));
+// console.log(data);
+// console.log(find({content: 'I love Fullstack!!!'}));
