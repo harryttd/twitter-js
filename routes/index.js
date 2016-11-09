@@ -7,11 +7,31 @@ const router = express.Router();
 // could use one line instead: const router = require('express').Router();
 const tweetBank = require('../tweetBank');
 const chalk = require('chalk');
+const bodyParser = require('body-parser');
 
-router.get('/', function (req, res) {
+router.use(bodyParser.urlencoded({ extended: true })); // for HTML form submits
+router.use(bodyParser.json()); // would be for AJAX requests
+
+router.use('/', function (req, res) {
   console.log(chalk.blue('Went to routers'));
-  let tweets = tweetBank.list();
-  res.render( 'index', { tweets: tweets } );
+  let allTweets = tweetBank.list();
+  res.render( 'index', { title: 'Twitter.js', tweets: allTweets, showForm: true });
+});
+
+router.get('/user/:username', function(req, res, next) {
+  let userTweets = tweetBank.find({name: req.params.username});
+  res.render('index', {title: 'Twitter.js', tweets: userTweets, showForm: true, username: req.params.username});
+});
+
+router.get('/tweets/:id', function(req, res, next) {
+  let tweet = tweetBank.find({id: +req.params.id});
+  res.render('index', {title: 'Twitter.js', tweets: tweet});
+});
+
+router.post('/tweets', function(req, res, next) {
+  tweetBank.add(req.body.name, req.body.text);
+  res.redirect('/');
+  next();
 });
 
 router.use(express.static('public'));

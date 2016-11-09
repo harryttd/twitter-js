@@ -9,17 +9,17 @@
 
 const _ = require('lodash');
 
-let data = [{name: 'Colin Jaffe', content: 'I love Fullstack!!!'}];
+let data = [{name: 'Colin Jaffe', content: 'I love Fullstack!!!', id: 0}];
 
-function add (name, content) {
-  data.push({ name: name, content: content });
+function add(name, content) {
+  data.push({ name: name, content: content, id: data.length});
 }
 
-function list () {
+function list() {
   return _.cloneDeep(data);
 }
 
-function find (properties) {
+function find(properties) {
   return _.cloneDeep(_.filter(data, properties));
 }
 

@@ -2,34 +2,27 @@
 /*jshint esversion: 6 */
 
 const express = require('express');
+const app = express(); // creates an instance of an express application
 const bodyParser = require('body-parser');
 const chalk = require('chalk');
 const nunjucks = require('nunjucks');
-const app = express(); // creates an instance of an express application
-const routes = require('./routes/');
+const routes = require('./routes');
 const morgan = require('morgan');
 const port = 3000;
 
-nunjucks.configure('views', {noCache: true}); // point nunjucks to the proper directory for templates
-app.set('view engine', 'html'); // have res.render work with html files
 app.engine('html', nunjucks.render); // when giving html files to res.render, tell it to use nunjucks
+app.set('view engine', 'html'); // have res.render work with html files
+nunjucks.configure('views', {noCache: true}); // point nunjucks to the proper directory for templates
 
 nunjucks.render('index.html', function (err, output) {
-  if (err) return console.lof(err);
-  console.log(output);
-});
-
-app.use(function (req, res, next) {
-    // do your logging here
-    console.log(chalk.red('This should go off every time.'));
-    // call `next`, or else your app will be a black hole — receiving requests but never properly responding
-    next();
+  if (err) return console.log(err);
+  // console.log(output);
 });
 
 app.use(morgan('dev'));
 app.use('/', routes);
 
-app.listen(port, (request, response) => {
+app.listen(port, () => {
   console.log(chalk.blue("server listening"));
 });
 
